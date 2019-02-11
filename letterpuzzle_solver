@@ -1,0 +1,38 @@
+#input used: letters = sretiivdy, obligatory letter = i (longest word is "diversity" with 9 letters)
+
+def letterpuzzle_solver():
+  import nltk
+  wordlist = nltk.corpus.words.words()
+  lettersinput = input("Enter the 9 letters of the puzzle: ")
+  letters = nltk.FreqDist(lettersinput)
+  obligatory = input("Enter the obligatory letter from the middle of the puzzle: ")
+  solutions = [w for w in wordlist if len(w) >= 4
+    and obligatory in w
+    and nltk.FreqDist(w) <= letters]
+  maxlength = str(len(max(solutions, key=len)))
+  longestword = str(max(solutions, key=len))
+  print('The longest word you can make has ' + maxlength + str(' letters: ') + longestword)
+  return solutions
+    
+#is limited by the word list corpus used (therefore may not always produce a 9 letter word)
+#does not account for usage of proper nouns
+#does not account for plurals ending in 's'
+#only accepts input in lowercase
+
+#second attempt to account for uppercase by folding case with lettersinputcorrected    
+def letterpuzzle_solver2():
+  import nltk
+  wordlist = nltk.corpus.words.words()
+  lettersinput = input("Enter the 9 letters of the puzzle: ")
+  lettersinputcorrected = set(w.lower() for w in lettersinput if w.isalpha())
+  letters = nltk.FreqDist(lettersinputcorrected)
+  obligatory = input("Enter the obligatory letter from the middle of the puzzle: ")
+  solutions = [w for w in wordlist if len(w) >= 4
+    and obligatory in w
+    and nltk.FreqDist(w) <= letters]
+  maxlength = str(len(max(solutions, key=len)))
+  longestword = str(max(solutions, key=len))
+  print('The longest word you can make has ' + maxlength + str(' letters: ') + longestword)
+  return solutions
+  
+  #however this does not return "diversity" for the example input, rather it limits at 7 letter-word "strived" and I don't know why
