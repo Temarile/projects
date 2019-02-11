@@ -1,4 +1,12 @@
 #input used: letters = sretiivdy, obligatory letter = i (longest word is "diversity" with 9 letters)
+#letter puzzle rules: 
+  # 1. words of at least 4 letters, 
+  # 2. each letter may only be used once per word,
+  # 3. must have the center letter (obligatory letter),
+  # 4. must be at least one 9-letter word,
+  # 5. no plurals ending in 's',
+  # 6. no foreign (not english) words,
+  # 7. no proper names allowed.
 
 def letterpuzzle_solver():
   import nltk
